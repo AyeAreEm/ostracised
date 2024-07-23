@@ -15,6 +15,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	$Sprite2D/AnimationPlayer.play("kingsguard_player_idle")
 	
+func handle_roll():
+	pass
+	
 func handle_jump():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump_start = Time.get_unix_time_from_system()
@@ -32,6 +35,10 @@ func handle_jump():
 				velocity.y = JUMP_VELOCITY * time_elapsed
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("sprint"):
+		handle_roll()
+		CURRENT_SPEED = RUN_SPEED
+	
 	if Input.is_action_pressed("sprint"):
 		CURRENT_SPEED = RUN_SPEED
 	else:
