@@ -13,10 +13,13 @@ var jump_start = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	$Sprite2D/AnimationPlayer.play("kingsguard_player_idle")
+	$IdleAnimation/AnimationPlayer.play("kingsguard_player_idle")
 	
 func handle_roll():
-	pass
+		$IdleAnimation/AnimationPlayer.stop()
+		$RollAnimation/AnimationPlayer.play("roll_animation")
+		print("rolling")
+	
 	
 func handle_jump():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -36,8 +39,8 @@ func handle_jump():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("sprint"):
-		handle_roll()
 		CURRENT_SPEED = RUN_SPEED
+		handle_roll()
 	
 	if Input.is_action_pressed("sprint"):
 		CURRENT_SPEED = RUN_SPEED
