@@ -62,5 +62,6 @@ libraries = {
 "": SubResource("AnimationLibrary_rn0ct")
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(0, -75)
+offset = Vector2(0, 10)

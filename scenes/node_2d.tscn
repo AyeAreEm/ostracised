@@ -7,5 +7,8 @@
 
 [node name="StaticBody2D" parent="." instance=ExtResource("1_hsp3b")]
 
+[node name="StaticBody2D" parent="StaticBody2D" instance=ExtResource("1_hsp3b")]
+position = Vector2(257, -21)
+
 [node name="Node2D" parent="." instance=ExtResource("1_ynqtu")]
 position = Vector2(136, 143)
