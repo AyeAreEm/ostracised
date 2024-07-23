@@ -1,14 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0pyuvhosk5by"]
+[gd_scene load_steps=3 format=3 uid="uid://b0pyuvhosk5by"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhwsq"]
-size = Vector2(319.5, 20)
+[ext_resource type="PackedScene" uid="uid://c8lx484jocg2n" path="res://scenes/RANDOMBLOCK.tscn" id="1_hsp3b"]
+[ext_resource type="PackedScene" uid="uid://qghrutf8knne" path="res://player/player.tscn" id="1_ynqtu"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" parent="." instance=ExtResource("1_hsp3b")]
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(160.25, 169)
-shape = SubResource("RectangleShape2D_jhwsq")
+[node name="Node2D" parent="." instance=ExtResource("1_ynqtu")]
+position = Vector2(136, 143)
