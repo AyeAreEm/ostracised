@@ -13,7 +13,7 @@ var jump_start = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	$Sprite2D/AnimationPlayer.play("Idle_temp")
+	$Sprite2D/AnimationPlayer.play("kingsguard_player_idle")
 	
 func handle_jump():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -23,8 +23,8 @@ func handle_jump():
 		var time_elapsed = Time.get_unix_time_from_system() - jump_start
 		print(time_elapsed)
 		
-		if time_elapsed > 1.5:
-			velocity.y = JUMP_VELOCITY * 2
+		if time_elapsed > 1.2:
+			velocity.y = JUMP_VELOCITY * 1.2
 		else:
 			if JUMP_VELOCITY * time_elapsed < JUMP_VELOCITY * -1:
 				velocity.y = JUMP_VELOCITY
