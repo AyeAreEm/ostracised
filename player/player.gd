@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var player_stats: Stats
+
 @export var WALK_SPEED = 80
 @export var RUN_SPEED = 130
 @export var FRICTION = 100
@@ -14,12 +16,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
 	
+	
 func handle_roll():
 		$AnimationSpriteSheet/AnimationPlayer.stop()
 		$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("sprint"):
+	if Input.is_action_just_pressed("sprint") and is_on_floor():
 		CURRENT_SPEED = RUN_SPEED
 		handle_roll()
 	
@@ -33,16 +36,16 @@ func _physics_process(delta):
 		get_tree().quit()
 
 	# Handle jump
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# -1 means left, 1 means right
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
 		if direction == -1:
-			pass
+			$AnimationSpriteSheet.flip_h = true
 		else:
-			pass
+			$AnimationSpriteSheet.flip_h = false
 		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
@@ -52,3 +55,12 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	move_and_slide()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "roll_animation":
+		$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
+
+
+func _on_stats_taken_damage(damage_done):
+	$Camera2D/HealthBar.transform.x -= damage_done
