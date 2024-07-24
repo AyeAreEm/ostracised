@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwj77enppq0hb"]
+
+[ext_resource type="Script" path="res://scenes/Enemy_Placeholder.gd" id="1_butei"]
+[ext_resource type="Texture2D" uid="uid://b6iws1bg1hnjj" path="res://enemy_place_holder_idle.png" id="1_fj6c6"]
+
+[sub_resource type="Animation" id="Animation_8cke2"]
+resource_name = "enemy_idle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_h3gi0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scayr"]
+_data = {
+"RESET": SubResource("Animation_h3gi0"),
+"enemy_idle": SubResource("Animation_8cke2")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y21fx"]
+radius = 9.0
+height = 40.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_butei")
+
+[node name="EnemySprite" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-1, 0)
+texture = ExtResource("1_fj6c6")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/EnemySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_scayr")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_y21fx")
