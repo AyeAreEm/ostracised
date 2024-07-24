@@ -16,16 +16,27 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
 	player_stats.taken_damage.connect(handle_damage)
+	player_stats.death.connect(handle_death)
 	
 func handle_damage(damage):
 	print("this is the remaining health: ", player_stats.health)
 	$Camera2D/HealthBar.offset.x -= damage
 	
+func handle_death():
+	print("you died")
+	
 func handle_roll():
 		$AnimationSpriteSheet/AnimationPlayer.stop()
 		$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
+		
+func dev_testing():
+	if Input.is_action_just_pressed("dev_take_damage"):
+		player_stats.take_damage(1)
 
 func _physics_process(delta):
+	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
+	dev_testing()
+	
 	if Input.is_action_just_pressed("sprint") and is_on_floor():
 		CURRENT_SPEED = RUN_SPEED
 		handle_roll()
