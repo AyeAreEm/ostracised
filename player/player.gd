@@ -17,9 +17,8 @@ func _ready():
 	
 func handle_roll():
 		$IdleAnimation/AnimationPlayer.stop()
+		get_node("IdleAnimation").hide()
 		$RollAnimation/AnimationPlayer.play("roll_animation")
-		print("rolling")
-	
 	
 func handle_jump():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -27,7 +26,6 @@ func handle_jump():
 		
 	if Input.is_action_just_released("ui_accept") and is_on_floor():
 		var time_elapsed = Time.get_unix_time_from_system() - jump_start
-		print(time_elapsed)
 		
 		if time_elapsed > 1.2:
 			velocity.y = JUMP_VELOCITY * 1.2
