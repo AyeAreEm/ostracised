@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://qghrutf8knne"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_xcupb"]
-[ext_resource type="Texture2D" uid="uid://ca08bcbd7l61v" path="res://kinsguard_player_roll_and_idle.png" id="2_k00mt"]
+[ext_resource type="Texture2D" uid="uid://ca08bcbd7l61v" path="res://assets/kinsguard_player_roll_and_idle.png" id="2_k00mt"]
 [ext_resource type="Resource" uid="uid://e0jeabm8fv5e" path="res://player/player_stats.tres" id="2_t6gjy"]
-[ext_resource type="Texture2D" uid="uid://5l30g43e8ecm" path="res://health border.png" id="4_bna6f"]
-[ext_resource type="Texture2D" uid="uid://b53pg4f61xkm5" path="res://health bar.png" id="4_yt4wm"]
+[ext_resource type="Texture2D" uid="uid://5l30g43e8ecm" path="res://assets/health border.png" id="4_bna6f"]
+[ext_resource type="Texture2D" uid="uid://b53pg4f61xkm5" path="res://assets/health bar.png" id="4_yt4wm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcxbh"]
 

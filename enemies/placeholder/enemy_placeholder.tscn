@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://vgkdh4pmmeq6"]
 
-[ext_resource type="Script" path="res://scenes/Enemy_Placeholder.gd" id="1_butei"]
-[ext_resource type="Texture2D" uid="uid://b6iws1bg1hnjj" path="res://enemy_place_holder_idle.png" id="1_fj6c6"]
+[ext_resource type="Script" path="res://enemies/placeholder/Enemy_Placeholder.gd" id="1_butei"]
+[ext_resource type="Texture2D" uid="uid://b6iws1bg1hnjj" path="res://enemies/placeholder/enemy_place_holder_idle.png" id="1_fj6c6"]
 [ext_resource type="Resource" uid="uid://e0jeabm8fv5e" path="res://player/player_stats.tres" id="2_fe1so"]
 
 [sub_resource type="Animation" id="Animation_h3gi0"]

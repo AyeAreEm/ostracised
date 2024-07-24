@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/RANDOMBLOCK.tscn" id="1_hsp3b"]
 [ext_resource type="PackedScene" uid="uid://qghrutf8knne" path="res://player/player.tscn" id="1_ynqtu"]
-[ext_resource type="PackedScene" uid="uid://vgkdh4pmmeq6" path="res://scenes/enemy_placeholder.tscn" id="3_oj1pt"]
+[ext_resource type="PackedScene" uid="uid://vgkdh4pmmeq6" path="res://enemies/placeholder/enemy_placeholder.tscn" id="3_oj1pt"]
 
 [node name="Node2D" type="Node2D"]
 

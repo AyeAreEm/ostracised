@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6iws1bg1hnjj"
-path="res://.godot/imported/enemy_place_holder_idle.png-8694f3d14532aefa85aefd9bf9e88447.ctex"
+uid="uid://5l30g43e8ecm"
+path="res://.godot/imported/health border.png-4cc7089ea514ed654b34565405db45a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy_place_holder_idle.png"
-dest_files=["res://.godot/imported/enemy_place_holder_idle.png-8694f3d14532aefa85aefd9bf9e88447.ctex"]
+source_file="res://assets/health border.png"
+dest_files=["res://.godot/imported/health border.png-4cc7089ea514ed654b34565405db45a0.ctex"]
 
 [params]
 
