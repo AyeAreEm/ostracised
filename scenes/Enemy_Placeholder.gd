@@ -5,4 +5,4 @@ extends CharacterBody2D
 func _ready():
 	$EnemySprite/AnimationPlayer.play("enemy_idle")
 	player_stats.take_damage(20)
-	print(player_stats.health)
+	print("this is damage done: ", 20)
