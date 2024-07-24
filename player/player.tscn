@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://qghrutf8knne"]
+[gd_scene load_steps=13 format=3 uid="uid://qghrutf8knne"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_xcupb"]
 [ext_resource type="Texture2D" uid="uid://cdj7fyedgcdrs" path="res://kinsguard_player_roll.png" id="2_00c0v"]
 [ext_resource type="Texture2D" uid="uid://cn1ineob85d8r" path="res://kinsguard_playe_idle.png" id="2_ej3tt"]
+[ext_resource type="Texture2D" uid="uid://5l30g43e8ecm" path="res://health border.png" id="4_bna6f"]
+[ext_resource type="Texture2D" uid="uid://b53pg4f61xkm5" path="res://health bar.png" id="4_yt4wm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcxbh"]
 
@@ -113,7 +115,7 @@ libraries = {
 
 [node name="IdleAnimation" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-position = Vector2(-1, -2)
+position = Vector2(0, -3)
 texture = ExtResource("2_ej3tt")
 hframes = 8
 
@@ -123,5 +125,12 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(0, -43)
-offset = Vector2(0, 10)
+position = Vector2(0, -30)
+
+[node name="HealthBar" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
+position = Vector2(-126, -80)
+texture = ExtResource("4_yt4wm")
+
+[node name="HealthBorder" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
+position = Vector2(-126, -80)
+texture = ExtResource("4_bna6f")
