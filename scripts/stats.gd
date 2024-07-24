@@ -8,11 +8,12 @@ signal taken_damage
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("dev_take_damage"):
-		take_damage()
+		take_damage(1)
+		print(health)
 
-func take_damage():
-	health -= 10
+func take_damage(damage_amount: int):
+	health -= damage_amount
 	if health == 0:
 		print("AZHHHHHHHH")
 		
-	taken_damage.emit(10)
+	taken_damage.emit(damage_amount)

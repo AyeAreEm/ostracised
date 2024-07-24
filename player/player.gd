@@ -63,4 +63,5 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_stats_taken_damage(damage_done):
-	$Camera2D/HealthBar.transform.x -= damage_done
+	print("i have taken damage")
+	$Camera2D/HealthBarl.frame_coords.x -= damage_done
