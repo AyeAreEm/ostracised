@@ -12,12 +12,11 @@ var CURRENT_SPEED = WALK_SPEED
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	$IdleAnimation/AnimationPlayer.play("kingsguard_player_idle")
+	$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
 	
 func handle_roll():
-		$IdleAnimation/AnimationPlayer.stop()
-		get_node("IdleAnimation").hide()
-		$RollAnimation/AnimationPlayer.play("roll_animation")
+		$AnimationSpriteSheet/AnimationPlayer.stop()
+		$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("sprint"):
