@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY = -235
 
 var CURRENT_SPEED = WALK_SPEED
+var paused = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -26,8 +27,18 @@ func handle_death():
 	print("you died")
 	
 func handle_roll():
-		$AnimationSpriteSheet/AnimationPlayer.stop()
-		$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
+	$AnimationSpriteSheet/AnimationPlayer.stop()
+	$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
+		
+func handle_pause_menu():
+	if paused:
+		$Camera2D/PauseMenu.hide()
+		Engine.time_scale = 1
+	else:
+		$Camera2D/PauseMenu.show()
+		Engine.time_scale = 0
+		
+	paused = !paused
 		
 func dev_testing():
 	if Input.is_action_just_pressed("dev_take_damage"):
@@ -39,7 +50,7 @@ func _physics_process(delta):
 	
 	# this quits the game, will change to be the menu
 	if Input.is_action_just_pressed("menu"):
-		get_tree().quit()
+		handle_pause_menu()
 	
 	if Input.is_action_just_pressed("sprint") and is_on_floor():
 		CURRENT_SPEED = RUN_SPEED

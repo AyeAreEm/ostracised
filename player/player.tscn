@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://qghrutf8knne"]
+[gd_scene load_steps=12 format=3 uid="uid://qghrutf8knne"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_xcupb"]
 [ext_resource type="Texture2D" uid="uid://ca08bcbd7l61v" path="res://assets/kinsguard_player_roll_and_idle.png" id="2_k00mt"]
 [ext_resource type="Resource" uid="uid://e0jeabm8fv5e" path="res://player/player_stats.tres" id="2_t6gjy"]
 [ext_resource type="Texture2D" uid="uid://bcar5u04lqvv6" path="res://assets/test_health_bar.png" id="4_c7xua"]
+[ext_resource type="PackedScene" uid="uid://cwscm5eb5oqgh" path="res://scenes/pause_menu.tscn" id="4_ct1vh"]
 [ext_resource type="Texture2D" uid="uid://c0f5n1vaik7gq" path="res://assets/test_health_border.png" id="5_woimo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcxbh"]
@@ -94,5 +95,12 @@ texture = ExtResource("4_c7xua")
 [node name="HealthBorder" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
 position = Vector2(-126, -79)
 texture = ExtResource("5_woimo")
+
+[node name="PauseMenu" parent="CharacterBody2D/Camera2D" instance=ExtResource("4_ct1vh")]
+visible = false
+offset_left = -33.0
+offset_top = -33.0
+offset_right = -33.0
+offset_bottom = -33.0
 
 [connection signal="animation_finished" from="CharacterBody2D/AnimationSpriteSheet/AnimationPlayer" to="CharacterBody2D" method="_on_animation_player_animation_finished"]
