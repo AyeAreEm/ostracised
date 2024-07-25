@@ -20,7 +20,7 @@ func _ready():
 	
 func handle_damage(damage):
 	print("this is the remaining health: ", player_stats.health)
-	$Camera2D/HealthBar.offset.x -= damage
+	$Camera2D/HealthBar.position.x -= damage
 	
 func handle_death():
 	print("you died")
@@ -37,6 +37,10 @@ func _physics_process(delta):
 	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
 	dev_testing()
 	
+	# this quits the game, will change to be the menu
+	if Input.is_action_just_pressed("menu"):
+		get_tree().quit()
+	
 	if Input.is_action_just_pressed("sprint") and is_on_floor():
 		CURRENT_SPEED = RUN_SPEED
 		handle_roll()
@@ -45,17 +49,13 @@ func _physics_process(delta):
 		CURRENT_SPEED = RUN_SPEED
 	else:
 		CURRENT_SPEED = WALK_SPEED
-	
-	# this quits the game, will change to be the menu
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 	# Handle jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# -1 means left, 1 means right
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("left", "right")
 	if direction:
 		if direction == -1:
 			$AnimationSpriteSheet.flip_h = true

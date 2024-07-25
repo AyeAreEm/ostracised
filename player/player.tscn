@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://player/player.gd" id="1_xcupb"]
 [ext_resource type="Texture2D" uid="uid://ca08bcbd7l61v" path="res://assets/kinsguard_player_roll_and_idle.png" id="2_k00mt"]
 [ext_resource type="Resource" uid="uid://e0jeabm8fv5e" path="res://player/player_stats.tres" id="2_t6gjy"]
-[ext_resource type="Texture2D" uid="uid://5l30g43e8ecm" path="res://assets/health border.png" id="4_bna6f"]
-[ext_resource type="Texture2D" uid="uid://b53pg4f61xkm5" path="res://assets/health bar.png" id="4_yt4wm"]
+[ext_resource type="Texture2D" uid="uid://bcar5u04lqvv6" path="res://assets/test_health_bar.png" id="4_c7xua"]
+[ext_resource type="Texture2D" uid="uid://c0f5n1vaik7gq" path="res://assets/test_health_border.png" id="5_woimo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcxbh"]
 
@@ -88,11 +88,11 @@ libraries = {
 position = Vector2(0, -30)
 
 [node name="HealthBar" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
-position = Vector2(-126, -80)
-texture = ExtResource("4_yt4wm")
+position = Vector2(-117, -75)
+texture = ExtResource("4_c7xua")
 
 [node name="HealthBorder" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
-position = Vector2(-126, -80)
-texture = ExtResource("4_bna6f")
+position = Vector2(-126, -79)
+texture = ExtResource("5_woimo")
 
 [connection signal="animation_finished" from="CharacterBody2D/AnimationSpriteSheet/AnimationPlayer" to="CharacterBody2D" method="_on_animation_player_animation_finished"]
