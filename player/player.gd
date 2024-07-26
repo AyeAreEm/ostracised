@@ -1,5 +1,15 @@
 extends CharacterBody2D
 
+enum State {
+	Idle,
+	Roll,
+	Walk,
+	Jump,
+	Fall,
+}
+
+var current_state = State.Idle
+
 @export var player_stats: Stats
 
 @export var WALK_SPEED = 80
@@ -20,6 +30,28 @@ var paused = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func enter_state(state, force = false):
+	if current_state == state:
+		return
+	
+	if current_state == State.Roll and !force:
+		return
+	
+	current_state = state
+	AnimPlay.stop()
+	match state:
+		State.Idle:
+			AnimPlay.play("kingsguard_idle")
+		State.Walk:
+			AnimPlay.play("kingsguard_walk")
+		State.Jump:
+			AnimPlay.play("kingsguard_jump")
+		State.Fall:
+			pass
+		State.Roll:
+			# MIGHT NEED TO REMOVE THIS
+			AnimPlay.play("roll_animation")
+
 func _ready():
 	AnimPlay.play("kingsguard_idle")
 	player_stats.taken_damage.connect(handle_damage)
@@ -33,8 +65,25 @@ func handle_death():
 	print("you died")
 	
 func handle_roll():
-	AnimPlay.stop()
-	AnimPlay.play("roll_animation")
+	CURRENT_SPEED = RUN_SPEED
+	enter_state(State.Roll)
+	
+func handle_idle():
+	velocity.x = move_toward(velocity.x, 0, FRICTION)
+	enter_state(State.Idle)
+	
+func handle_move(direction):
+	if direction == -1:
+		Sprite.flip_h = true
+	else:
+		Sprite.flip_h = false
+		
+	velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+	enter_state(State.Walk)
+	
+func handle_jump():
+	velocity.y = JUMP_VELOCITY
+	enter_state(State.Jump)
 		
 func handle_pause_menu():
 	if paused:
@@ -59,7 +108,6 @@ func _physics_process(delta):
 		handle_pause_menu()
 	
 	if Input.is_action_just_pressed("sprint") and is_on_floor():
-		CURRENT_SPEED = RUN_SPEED
 		handle_roll()
 	
 	if Input.is_action_pressed("sprint"):
@@ -69,33 +117,21 @@ func _physics_process(delta):
 
 	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		print("playing jump")
-		AnimPlay.play("kingsguard_jump")
+		handle_jump()
 
 	# -1 means left, 1 means right
 	var direction = Input.get_axis("left", "right")
-	
 	if direction:
-		if direction == -1:
-			Sprite.flip_h = true
-			AnimPlay.play("kingsguard_walk")
-		else:
-			Sprite.flip_h = false
-			AnimPlay.play("kingsguard_walk")
-		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
-		
+		handle_move(direction)
 	else:
-		velocity.x = move_toward(velocity.x, 0, FRICTION)
-		AnimPlay.play("kingsguard_idle")
+		handle_idle()
 		
 	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-
 	move_and_slide()
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "roll_animation":
-		AnimPlay.play("kingsguard_player_idle")
+		enter_state(State.Idle, true)
