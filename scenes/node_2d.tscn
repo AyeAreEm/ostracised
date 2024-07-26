@@ -6,10 +6,10 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="StaticBody2D" parent="." instance=ExtResource("1_hsp3b")]
-
-[node name="StaticBody2D" parent="StaticBody2D" instance=ExtResource("1_hsp3b")]
+[node name="StaticBody2D2" parent="." instance=ExtResource("1_hsp3b")]
 position = Vector2(257, -21)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("1_hsp3b")]
 
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("3_oj1pt")]
 position = Vector2(-12, 138)
