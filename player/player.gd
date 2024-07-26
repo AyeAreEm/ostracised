@@ -8,7 +8,7 @@ enum State {
 	Fall,
 }
 
-var current_state = State.Idle
+var current_state
 
 @export var player_stats: Stats
 
@@ -26,6 +26,7 @@ var current_state = State.Idle
 
 var CURRENT_SPEED = WALK_SPEED
 var paused = false
+var previous_height = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -47,13 +48,13 @@ func enter_state(state, force = false):
 		State.Jump:
 			AnimPlay.play("kingsguard_jump")
 		State.Fall:
-			pass
+			AnimPlay.play("kingsguard_fall")
 		State.Roll:
 			# MIGHT NEED TO REMOVE THIS
 			AnimPlay.play("roll_animation")
 
 func _ready():
-	AnimPlay.play("kingsguard_idle")
+	enter_state(State.Idle)
 	player_stats.taken_damage.connect(handle_damage)
 	player_stats.death.connect(handle_death)
 	
@@ -81,7 +82,19 @@ func handle_move(direction):
 	velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
 	enter_state(State.Walk)
 	
+func check_falling():
+	if previous_height > position.y:
+		print("falling")
+		enter_state(State.Fall)
+		
+	elif previous_height == position.y:
+		enter_state(State.Idle)
+		
+	previous_height = position.y
+	
 func handle_jump():
+	print("jumping")
+	previous_height = position.y
 	velocity.y = JUMP_VELOCITY
 	enter_state(State.Jump)
 		
@@ -115,9 +128,11 @@ func _physics_process(delta):
 	else:
 		CURRENT_SPEED = WALK_SPEED
 
-	# Handle jump
+	# handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		handle_jump()
+		
+	check_falling()
 
 	# -1 means left, 1 means right
 	var direction = Input.get_axis("left", "right")
