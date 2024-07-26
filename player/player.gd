@@ -8,6 +8,10 @@ extends CharacterBody2D
 @export var ACCELERATION = 50
 @export var JUMP_VELOCITY = -235
 
+#makes it so we dont have to get it every time 
+@onready var AnimPlay = $AnimationSpriteSheet/AnimationPlayer
+@onready var Sprite = $AnimationSpriteSheet
+
 var CURRENT_SPEED = WALK_SPEED
 var paused = false
 
@@ -15,7 +19,7 @@ var paused = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
+	AnimPlay.play("kingsguard_idle")
 	player_stats.taken_damage.connect(handle_damage)
 	player_stats.death.connect(handle_death)
 	
@@ -27,8 +31,8 @@ func handle_death():
 	print("you died")
 	
 func handle_roll():
-	$AnimationSpriteSheet/AnimationPlayer.stop()
-	$AnimationSpriteSheet/AnimationPlayer.play("roll_animation")
+	AnimPlay.stop()
+	AnimPlay.play("roll_animation")
 		
 func handle_pause_menu():
 	if paused:
@@ -67,21 +71,26 @@ func _physics_process(delta):
 
 	# -1 means left, 1 means right
 	var direction = Input.get_axis("left", "right")
+	
 	if direction:
 		if direction == -1:
-			$AnimationSpriteSheet.flip_h = true
+			Sprite.flip_h = true
+			#AnimPlay.play("kingsguard_walk")
 		else:
-			$AnimationSpriteSheet.flip_h = false
+			Sprite.flip_h = false
+			#AnimPlay.play("kingsguard_walk")
 		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
-	
+		
 	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
 
 	move_and_slide()
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "roll_animation":
-		$AnimationSpriteSheet/AnimationPlayer.play("kingsguard_player_idle")
+		AnimPlay.play("kingsguard_player_idle")

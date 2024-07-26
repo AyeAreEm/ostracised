@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0pyuvhosk5by"]
 
-[ext_resource type="PackedScene" path="res://scenes/RANDOMBLOCK.tscn" id="1_hsp3b"]
+[ext_resource type="PackedScene" uid="uid://c8lx484jocg2n" path="res://scenes/RANDOMBLOCK.tscn" id="1_hsp3b"]
 [ext_resource type="PackedScene" uid="uid://qghrutf8knne" path="res://player/player.tscn" id="1_ynqtu"]
 [ext_resource type="PackedScene" uid="uid://vgkdh4pmmeq6" path="res://enemies/placeholder/enemy_placeholder.tscn" id="3_oj1pt"]
 
@@ -16,3 +16,7 @@ position = Vector2(-12, 138)
 
 [node name="Player" parent="." instance=ExtResource("1_ynqtu")]
 position = Vector2(136, 143)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("1_hsp3b")]
+position = Vector2(312, -40)
+rotation = -0.311732

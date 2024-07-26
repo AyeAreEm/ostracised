@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8lx484jocg2n"]
 
-[ext_resource type="Texture2D" uid="uid://3t57s1cti261" path="res://RANDOMBLOCK.png" id="1_r6088"]
+[ext_resource type="Texture2D" uid="uid://3t57s1cti261" path="res://assets/RANDOMBLOCK.png" id="1_r6088"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_f0bn8"]
 

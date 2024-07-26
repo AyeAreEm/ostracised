@@ -1,13 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://qghrutf8knne"]
+[gd_scene load_steps=18 format=3 uid="uid://qghrutf8knne"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_xcupb"]
-[ext_resource type="Texture2D" uid="uid://ca08bcbd7l61v" path="res://assets/kinsguard_player_roll_and_idle.png" id="2_k00mt"]
 [ext_resource type="Resource" uid="uid://e0jeabm8fv5e" path="res://player/player_stats.tres" id="2_t6gjy"]
 [ext_resource type="Texture2D" uid="uid://bcar5u04lqvv6" path="res://assets/test_health_bar.png" id="4_c7xua"]
 [ext_resource type="PackedScene" uid="uid://cwscm5eb5oqgh" path="res://scenes/pause_menu.tscn" id="4_ct1vh"]
+[ext_resource type="Texture2D" uid="uid://bjv6gb3ethmw4" path="res://assets/kinsguard_playe_idle.png" id="4_js6vg"]
+[ext_resource type="Texture2D" uid="uid://c7knffm5ngivx" path="res://assets/kingsguardplayerwalkcycle.png" id="4_xda4v"]
 [ext_resource type="Texture2D" uid="uid://c0f5n1vaik7gq" path="res://assets/test_health_border.png" id="5_woimo"]
+[ext_resource type="Texture2D" uid="uid://bfstslq6wndfi" path="res://assets/kingsguard_player_jump.png" id="5_xdm1o"]
+[ext_resource type="Texture2D" uid="uid://jxgxrl1o4i3d" path="res://assets/kingsguard_fall.png" id="6_v5goy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcxbh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sgb4o"]
+load_path = "res://.godot/imported/kinsguard_player_roll_and_idle.png-e72396d955e7668811afd8a5fec8f4fd.ctex"
 
 [sub_resource type="Animation" id="Animation_7we10"]
 length = 0.001
@@ -23,45 +29,250 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_4kn0v"]
-resource_name = "kingsguard_player_idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [13, 14, 15, 16, 17, 18, 19, 20]
+"values": [SubResource("CompressedTexture2D_sgb4o")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
 }
 
-[sub_resource type="Animation" id="Animation_m8ia5"]
-resource_name = "roll_animation"
-length = 1.2
+[sub_resource type="Animation" id="Animation_cxjdn"]
+resource_name = "kingsguard_walk"
+loop_mode = 1
+step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13]
+"values": [ExtResource("4_xda4v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_mcnf8"]
+resource_name = "kingsguard_idle"
+length = 1.33334
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_js6vg")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333, 1, 1.16667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_ijysr"]
+resource_name = "kingsguard_jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_xdm1o")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_we0kb"]
+resource_name = "kingsguard_fall"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_v5goy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rn0ct"]
 _data = {
 "RESET": SubResource("Animation_7we10"),
-"kingsguard_player_idle": SubResource("Animation_4kn0v"),
-"roll_animation": SubResource("Animation_m8ia5")
+"kingsguard_fall": SubResource("Animation_we0kb"),
+"kingsguard_idle": SubResource("Animation_mcnf8"),
+"kingsguard_jump": SubResource("Animation_ijysr"),
+"kingsguard_walk": SubResource("Animation_cxjdn")
 }
 
 [node name="Node2D" type="Node2D"]
@@ -76,7 +287,7 @@ shape = SubResource("CapsuleShape2D_hcxbh")
 [node name="AnimationSpriteSheet" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(0, -2)
-texture = ExtResource("2_k00mt")
+texture = SubResource("CompressedTexture2D_sgb4o")
 hframes = 13
 vframes = 2
 
@@ -86,7 +297,7 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(0, -30)
+position = Vector2(0, -35)
 
 [node name="HealthBar" type="Sprite2D" parent="CharacterBody2D/Camera2D"]
 position = Vector2(-117, -75)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca08bcbd7l61v"
-path="res://.godot/imported/kinsguard_player_roll_and_idle.png-e72396d955e7668811afd8a5fec8f4fd.ctex"
+uid="uid://bjv6gb3ethmw4"
+path="res://.godot/imported/kinsguard_playe_idle.png-d6edce16d341f00b7d1764f6321607a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kinsguard_player_roll_and_idle.png"
-dest_files=["res://.godot/imported/kinsguard_player_roll_and_idle.png-e72396d955e7668811afd8a5fec8f4fd.ctex"]
+source_file="res://assets/kinsguard_playe_idle.png"
+dest_files=["res://.godot/imported/kinsguard_playe_idle.png-d6edce16d341f00b7d1764f6321607a6.ctex"]
 
 [params]
 
