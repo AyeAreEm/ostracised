@@ -35,11 +35,17 @@ func enter_state(state, force = false):
 	if current_state == state:
 		return
 	
-	if current_state == State.Roll and !force:
-		return
+	if !force:
+		if current_state == State.Roll:
+			return
 		
-	if current_state == State.Fall and !is_on_floor():
-		return
+		if current_state == State.Fall and !is_on_floor():
+			return
+		
+		if current_state == State.Jump and state == State.Idle:
+			# thought this would work but it seems like the animation still isn't playing
+			print("we jumping but there's an idle")
+			return
 	
 	current_state = state
 	AnimPlay.stop()
