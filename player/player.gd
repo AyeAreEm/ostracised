@@ -8,8 +8,6 @@ enum State {
 	Roll,
 }
 
-
-
 @export var player_stats: Stats
 
 @export var WALK_SPEED = 80
@@ -39,6 +37,9 @@ func enter_state(state, force = false):
 	
 	if current_state == State.Roll and !force:
 		return
+		
+	if current_state == State.Fall and !is_on_floor():
+		return
 	
 	current_state = state
 	AnimPlay.stop()
@@ -54,8 +55,6 @@ func enter_state(state, force = false):
 		State.Roll:
 			# MIGHT NEED TO REMOVE THIS
 			AnimPlay.play("roll_animation")
-			
-	
 
 func _ready():
 	enter_state(State.Idle)
@@ -91,9 +90,6 @@ func check_falling():
 		#print("falling")
 		enter_state(State.Fall)
 		
-	elif previous_height == position.y:
-		enter_state(State.Idle)
-		
 	previous_height = position.y
 	
 func handle_jump():
@@ -117,9 +113,6 @@ func dev_testing():
 		player_stats.take_damage(1)
 
 func _physics_process(delta):
-	
-	print(current_state)
-		 
 	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
 	dev_testing()
 	
