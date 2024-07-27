@@ -28,7 +28,7 @@ var CURRENT_SPEED = WALK_SPEED
 var paused = false
 var previous_height = 0
 
-var current_state
+var current_state = State.Idle
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
