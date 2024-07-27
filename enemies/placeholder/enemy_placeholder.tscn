@@ -21,7 +21,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_8cke2"]
 resource_name = "enemy_idle"
-length = 1.0
 loop_mode = 1
 step = 0.0416667
 tracks/0/type = "value"

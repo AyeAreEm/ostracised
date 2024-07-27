@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 enum State {
 	Idle,
-	Roll,
 	Walk,
 	Jump,
 	Fall,
+	Roll,
 }
 
-var current_state
+
 
 @export var player_stats: Stats
 
@@ -27,6 +27,8 @@ var current_state
 var CURRENT_SPEED = WALK_SPEED
 var paused = false
 var previous_height = 0
+
+var current_state
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -52,6 +54,8 @@ func enter_state(state, force = false):
 		State.Roll:
 			# MIGHT NEED TO REMOVE THIS
 			AnimPlay.play("roll_animation")
+			
+	
 
 func _ready():
 	enter_state(State.Idle)
@@ -83,8 +87,8 @@ func handle_move(direction):
 	enter_state(State.Walk)
 	
 func check_falling():
-	if previous_height > position.y:
-		print("falling")
+	if previous_height < position.y and !is_on_floor():
+		#print("falling")
 		enter_state(State.Fall)
 		
 	elif previous_height == position.y:
@@ -93,7 +97,7 @@ func check_falling():
 	previous_height = position.y
 	
 func handle_jump():
-	print("jumping")
+	#print("jumping")
 	previous_height = position.y
 	velocity.y = JUMP_VELOCITY
 	enter_state(State.Jump)
@@ -113,6 +117,9 @@ func dev_testing():
 		player_stats.take_damage(1)
 
 func _physics_process(delta):
+	
+	print(current_state)
+		 
 	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
 	dev_testing()
 	
