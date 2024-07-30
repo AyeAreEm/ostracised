@@ -20,6 +20,8 @@ func _physics_process(delta):
 		if start_time == 0:
 			start_time = Time.get_unix_time_from_system()
 		elif current_time - start_time >= 1:
+			AnimPlay.play("redguy_attack")
 			player_stats.take_damage(10)
 			start_time = 0
-			
+	else:
+		AnimPlay.play("redguy_idle")
