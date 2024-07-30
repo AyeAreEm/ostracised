@@ -37,7 +37,7 @@ func enter_state(state, force = false):
 		return
 	
 	if !force:
-		if current_state == State.Roll:
+		if current_state == State.Roll and state != State.Jump:
 			return
 		
 		if current_state == State.Fall and !is_on_floor():
@@ -54,6 +54,8 @@ func enter_state(state, force = false):
 		State.Walk:
 			AnimPlay.play("kingsguard_walk")
 		State.Jump:
+			previous_height = position.y
+			velocity.y = JUMP_VELOCITY
 			AnimPlay.play("kingsguard_jump")
 		State.Fall:
 			AnimPlay.play("kingsguard_fall")
@@ -65,6 +67,8 @@ func update_state():
 	match current_state:
 		State.Roll:
 			velocity.x = velocity.move_toward(Vector2(previous_direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+		State.Idle:
+			velocity.x = move_toward(velocity.x, 0, FRICTION)
 			
 func handle_damage(damage):
 	HealthBar.position.x -= damage
@@ -86,13 +90,6 @@ func handle_roll(direction):
 		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
 
 	enter_state(State.Roll)
-
-func handle_idle():
-	if current_state == State.Roll:
-		return
-	
-	velocity.x = move_toward(velocity.x, 0, FRICTION)
-	enter_state(State.Idle)
 	
 func handle_move(direction):
 	if direction == -1:
@@ -108,11 +105,6 @@ func check_falling():
 		enter_state(State.Fall)
 		
 	previous_height = position.y
-	
-func handle_jump():
-	previous_height = position.y
-	velocity.y = JUMP_VELOCITY
-	enter_state(State.Jump)
 		
 func handle_pause_menu():
 	if paused:
@@ -129,13 +121,12 @@ func dev_testing():
 		player_stats.take_damage(1)
 
 func _physics_process(delta):
-	update_state()
-	var direction = Input.get_axis("left", "right")
-	
 	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
 	dev_testing()
+	update_state() # not this
 	
-	# this quits the game, will change to be the menu
+	var direction = Input.get_axis("left", "right")
+	
 	if Input.is_action_just_pressed("menu"):
 		handle_pause_menu()
 	
@@ -149,7 +140,7 @@ func _physics_process(delta):
 
 	# handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		handle_jump()
+		enter_state(State.Jump)
 		
 	check_falling()
 
@@ -158,7 +149,7 @@ func _physics_process(delta):
 		previous_direction = direction
 		handle_move(direction)
 	else:
-		handle_idle()
+		enter_state(State.Idle)
 		
 	# Add the gravity
 	if not is_on_floor():
