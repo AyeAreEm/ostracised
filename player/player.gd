@@ -16,7 +16,7 @@ enum State {
 @export var ACCELERATION = 50
 @export var JUMP_VELOCITY = -235
 
-#makes it so we dont have to get it every time 
+# makes it so we dont have to get it every time 
 @onready var AnimPlay = $AnimationSpriteSheet/AnimationPlayer
 @onready var Sprite = $AnimationSpriteSheet
 @onready var PauseMenu = $Camera2D/PauseMenu
@@ -67,7 +67,6 @@ func update_state():
 			velocity.x = velocity.move_toward(Vector2(previous_direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
 			
 func handle_damage(damage):
-	print("this is the remaining health: ", player_stats.health)
 	HealthBar.position.x -= damage
 	
 func handle_death():
@@ -85,7 +84,6 @@ func handle_roll(direction):
 		velocity.x = velocity.move_toward(Vector2(previous_direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
 	else:
 		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
-		print(velocity)
 
 	enter_state(State.Roll)
 
@@ -107,13 +105,11 @@ func handle_move(direction):
 	
 func check_falling():
 	if previous_height < position.y and !is_on_floor():
-		#print("falling")
 		enter_state(State.Fall)
 		
 	previous_height = position.y
 	
 func handle_jump():
-	#print("jumping")
 	previous_height = position.y
 	velocity.y = JUMP_VELOCITY
 	enter_state(State.Jump)

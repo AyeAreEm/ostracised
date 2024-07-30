@@ -23,6 +23,7 @@ func _physics_process(delta):
 		elif current_time - start_time >= 1:
 			player_stats.take_damage(10)
 			start_time = 0
+			AnimPlay.stop()
 	else:
 		AnimPlay.play("redguy_idle")
 		start_time = 0
