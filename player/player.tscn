@@ -282,7 +282,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_a3wru"]
-resource_name = "roll_animation"
+resource_name = "kingsguard_roll"
 length = 0.6
 step = 0.0416667
 tracks/0/type = "value"
@@ -340,8 +340,8 @@ _data = {
 "kingsguard_fall": SubResource("Animation_we0kb"),
 "kingsguard_idle": SubResource("Animation_mcnf8"),
 "kingsguard_jump": SubResource("Animation_mukpe"),
-"kingsguard_walk": SubResource("Animation_cxjdn"),
-"roll_animation": SubResource("Animation_a3wru")
+"kingsguard_roll": SubResource("Animation_a3wru"),
+"kingsguard_walk": SubResource("Animation_cxjdn")
 }
 
 [node name="Node2D" type="Node2D"]

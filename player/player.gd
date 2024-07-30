@@ -62,7 +62,7 @@ func enter_state(state, force = false):
 			AnimPlay.play("kingsguard_fall")
 		State.Roll:
 			# MIGHT NEED TO REMOVE THIS
-			AnimPlay.play("roll_animation")
+			AnimPlay.play("kingsguard_roll")
 			
 func update_state():
 	match current_state:
@@ -178,5 +178,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "roll_animation":
+	if anim_name == "kingsguard_roll":
 		enter_state(State.Idle, true)
