@@ -25,3 +25,4 @@ func _physics_process(delta):
 			start_time = 0
 	else:
 		AnimPlay.play("redguy_idle")
+		start_time = 0

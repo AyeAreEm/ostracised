@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://qghrutf8knne" path="res://player/player.tscn" id="1_ynqtu"]
 [ext_resource type="PackedScene" uid="uid://vgkdh4pmmeq6" path="res://enemies/placeholder/enemy_placeholder.tscn" id="3_oj1pt"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("1_hsp3b")]
 position = Vector2(257, -22)
