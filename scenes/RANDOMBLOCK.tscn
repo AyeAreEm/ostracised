@@ -5,17 +5,17 @@
 [sub_resource type="QuadMesh" id="QuadMesh_f0bn8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhwsq"]
-size = Vector2(562, 20)
+size = Vector2(612, 20)
 
 [node name="StaticBody2D" type="StaticBody2D"]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 texture_filter = 1
-position = Vector2(175.736, 168.536)
-scale = Vector2(-560.189, 19.8635)
+position = Vector2(201.383, 168.536)
+scale = Vector2(-611.484, 19.8635)
 mesh = SubResource("QuadMesh_f0bn8")
 texture = ExtResource("1_r6088")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(176, 168)
+position = Vector2(201, 168)
 shape = SubResource("RectangleShape2D_jhwsq")
