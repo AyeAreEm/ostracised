@@ -27,6 +27,7 @@ var paused = false
 var previous_height = 0
 
 var current_state = State.Idle
+var previous_direction = 1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -43,8 +44,6 @@ func enter_state(state, force = false):
 			return
 		
 		if current_state == State.Jump and state == State.Idle:
-			# thought this would work but it seems like the animation still isn't playing
-			print("we jumping but there's an idle")
 			return
 	
 	current_state = state
@@ -61,24 +60,39 @@ func enter_state(state, force = false):
 		State.Roll:
 			# MIGHT NEED TO REMOVE THIS
 			AnimPlay.play("roll_animation")
-
-func _ready():
-	enter_state(State.Idle)
-	player_stats.taken_damage.connect(handle_damage)
-	player_stats.death.connect(handle_death)
-	
+			
+func update_state():
+	match current_state:
+		State.Roll:
+			velocity.x = velocity.move_toward(Vector2(previous_direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+			
 func handle_damage(damage):
 	print("this is the remaining health: ", player_stats.health)
 	HealthBar.position.x -= damage
 	
 func handle_death():
 	print("you died")
+
+func _ready():
+	enter_state(State.Idle)
+	player_stats.taken_damage.connect(handle_damage)
+	player_stats.death.connect(handle_death)
 	
-func handle_roll():
+func handle_roll(direction):
 	CURRENT_SPEED = RUN_SPEED
-	enter_state(State.Roll)
 	
+	if direction == 0:
+		velocity.x = velocity.move_toward(Vector2(previous_direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+	else:
+		velocity.x = velocity.move_toward(Vector2(direction * CURRENT_SPEED, global_transform.origin.y), ACCELERATION).x
+		print(velocity)
+
+	enter_state(State.Roll)
+
 func handle_idle():
+	if current_state == State.Roll:
+		return
+	
 	velocity.x = move_toward(velocity.x, 0, FRICTION)
 	enter_state(State.Idle)
 	
@@ -119,6 +133,9 @@ func dev_testing():
 		player_stats.take_damage(1)
 
 func _physics_process(delta):
+	update_state()
+	var direction = Input.get_axis("left", "right")
+	
 	# THIS SHOULD BE REMOVED BEFORE FINAL BUILD
 	dev_testing()
 	
@@ -127,7 +144,7 @@ func _physics_process(delta):
 		handle_pause_menu()
 	
 	if Input.is_action_just_pressed("sprint") and is_on_floor():
-		handle_roll()
+		handle_roll(direction)
 	
 	if Input.is_action_pressed("sprint"):
 		CURRENT_SPEED = RUN_SPEED
@@ -141,8 +158,8 @@ func _physics_process(delta):
 	check_falling()
 
 	# -1 means left, 1 means right
-	var direction = Input.get_axis("left", "right")
 	if direction:
+		previous_direction = direction
 		handle_move(direction)
 	else:
 		handle_idle()
