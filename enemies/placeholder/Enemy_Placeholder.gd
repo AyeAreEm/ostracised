@@ -1,11 +1,15 @@
 extends CharacterBody2D
 
 @export var player_stats: Stats
+
+@onready var AnimPlay = $EnemySprite/AnimationPlayer
+@onready var Sprite = $EnemySprite
+
 var player: CharacterBody2D
 var start_time = 0
 
 func _ready():
-	$EnemySprite/AnimationPlayer.play("enemy_idle")
+	AnimPlay.play("enemy_idle")
 	player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta):
