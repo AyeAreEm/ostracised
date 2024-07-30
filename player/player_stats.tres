@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_u72yp")
+max_health = 50
 health = 50
 strength = 0

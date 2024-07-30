@@ -4,6 +4,7 @@ class_name Stats
 signal taken_damage
 signal death
 
+@export var max_health: int = 50
 @export var health: int = 50
 @export var strength: int = 0
 

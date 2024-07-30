@@ -28,6 +28,7 @@ var previous_height = 0
 
 var current_state = State.Idle
 var previous_direction = 1
+var healing_charges = 2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -70,6 +71,22 @@ func update_state():
 		State.Idle:
 			velocity.x = move_toward(velocity.x, 0, FRICTION)
 			
+func handle_heal():
+	if healing_charges <= 0:
+		return
+		
+	if player_stats.health + 20 > player_stats.max_health:
+		var diff = player_stats.max_health - player_stats.health
+		player_stats.health += diff
+		HealthBar.position.x += diff
+	else:
+		player_stats.health += 20
+		HealthBar.position.x += 20
+
+	healing_charges -= 1
+	print(player_stats.health)
+	print(HealthBar.position.x)
+
 func handle_damage(damage):
 	HealthBar.position.x -= damage
 	
@@ -126,6 +143,9 @@ func _physics_process(delta):
 	update_state() # not this
 	
 	var direction = Input.get_axis("left", "right")
+	
+	if Input.is_action_just_pressed("heal"):
+		handle_heal()
 	
 	if Input.is_action_just_pressed("menu"):
 		handle_pause_menu()
