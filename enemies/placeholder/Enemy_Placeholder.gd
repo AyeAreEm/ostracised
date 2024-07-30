@@ -19,8 +19,8 @@ func _physics_process(delta):
 	if direction.length() <= 50:
 		if start_time == 0:
 			start_time = Time.get_unix_time_from_system()
-		elif current_time - start_time >= 1:
 			AnimPlay.play("redguy_attack")
+		elif current_time - start_time >= 1:
 			player_stats.take_damage(10)
 			start_time = 0
 	else:
